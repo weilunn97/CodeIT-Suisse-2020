@@ -22,11 +22,8 @@ def revisitgeometry(shape_coords, line_coords):
         itx = get_intersection_point(line, sl)
         itx[0] = int(itx[0]) if itx[0] == int(itx[0]) else round(itx[0], 2)
         itx[1] = int(itx[1]) if itx[1] == int(itx[1]) else round(itx[1], 2)
-        print(f"y = {line.m}x + {line.c} | y = {sl.m}x + {sl.c}/{sl.x_intercept}| INTERSECTION : {itx}")
         if itx is not None and lies_on_line(itx, sl):
-            print("LIES ON LINE")
             itxs.append(itx)
-    print('\n----------------------------------------------------------------------\n')
     return [{'x': itx[0], 'y': itx[1]} for itx in itxs]
 
 
@@ -88,7 +85,6 @@ def get_intersection_point(l1, l2):
 def lies_on_line(p, l):
     # CHECK FOR VERTICAL LINE
     if l.c is None:
-        print(l.x_intercept - ROUND_LIMIT, p[0], l.x_intercept + ROUND_LIMIT)
         return l.x_intercept - ROUND_LIMIT <= p[0] <= l.x_intercept + ROUND_LIMIT and l.ymin <= p[1] <= l.ymax
 
     # PROCEED AS USUAL
