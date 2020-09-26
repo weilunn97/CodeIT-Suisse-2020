@@ -26,7 +26,6 @@ def salad_spree(n, arrs):
         dq = deque(arr[:n].copy())
         sum_a = sum(dq)
         for i in range(n, len(arr)):
-            print(dq)
             min_amt = min(min_amt, sum_a)
             sum_a -= dq[0]
             sum_a += arr[i]
