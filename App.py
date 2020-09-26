@@ -3,8 +3,9 @@ import socket
 
 from flask import request, jsonify, Flask
 
+from codeitsuisse.routes.cluster import cluster
 from codeitsuisse.routes.contact_trace import contact_trace
-from codeitsuisse.routes.inventory_mgmt import inventory_mgmt
+from codeitsuisse.routes.inventory_management import inventory_management
 from codeitsuisse.routes.salad_spree import salad_spree
 
 app = Flask(__name__)
@@ -41,9 +42,18 @@ def evaluate_inventory_management():
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
     name, items = data[0].get("searchItemName"), data[0].get("items")
-    result = inventory_mgmt(name, items)
+    result = inventory_management(name, items)
     logging.info("My result :{}".format(result))
     return jsonify(result)
+
+
+@app.route('/cluster', methods=['POST'])
+def evaluate_cluster():
+    data = request.get_json()
+    logging.info("data sent for evaluation {}".format(data))
+    result = cluster(data)
+    logging.info("My result :{}".format(result))
+    return jsonify(answer=result)
 
 
 logger = logging.getLogger()

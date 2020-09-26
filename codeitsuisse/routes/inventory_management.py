@@ -2,7 +2,7 @@ import unittest
 from collections import deque
 
 
-def inventory_mgmt(name, items):
+def inventory_management(name, items):
     try:
         finals = []
         for item in items:
@@ -77,9 +77,9 @@ def get_path(dp):
 class Test(unittest.TestCase):
 
     def test_connect_ropes(self):
-        # self.assertEqual(["ACO-YZ"], inventory_mgmt("ABOYZ", ["ACOZ"]))
+        # self.assertEqual(["ACO-YZ"], inventory_management("ABOYZ", ["ACOZ"]))
         self.assertEqual(["-Samsung+h Aircon", "Samsung+a Air-con", "S-ams-ung Au-r-con"],
-                         inventory_mgmt("Samsung Aircon", ["Smsng Auon", "Amsungh Aircon", "Samsunga Airon"]))
+                         inventory_management("Samsung Aircon", ["Smsng Auon", "Amsungh Aircon", "Samsunga Airon"]))
 
 
 if __name__ == "__main__":
