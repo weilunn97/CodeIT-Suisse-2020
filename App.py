@@ -22,7 +22,7 @@ def evaluate_salad_spree():
     n, arrs = data.get("number_of_salads"), data.get("salad_prices_street_map")
     result = salad_spree(n, arrs)
     logging.info("My result :{}".format(result))
-    return jsonify(result)
+    return jsonify(result=result)
 
 
 logger = logging.getLogger()
