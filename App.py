@@ -5,8 +5,8 @@ from flask import request, jsonify, Flask
 
 from codeitsuisse.routes.clean_floor import clean_floor
 from codeitsuisse.routes.cluster import cluster
-from codeitsuisse.routes.contact_trace import contact_trace
 from codeitsuisse.routes.inventory_management import inventory_management
+from codeitsuisse.routes.revisitgeometry import revisitgeometry
 from codeitsuisse.routes.salad_spree import salad_spree
 
 app = Flask(__name__)
@@ -28,14 +28,14 @@ def evaluate_salad_spree():
     return jsonify(result=result)
 
 
-@app.route('/contact_trace', methods=['POST'])
-def evaluate_contact_trace():
+@app.route('/revisitgeometry', methods=['POST'])
+def evaluate_revisitgeometry():
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
-    n, arrs = data.get("number_of_salads"), data.get("salad_prices_street_map")
-    result = contact_trace(n, arrs)
+    sc, lc = data.get("shapeCoordinates"), data.get("lineCoordinates")
+    result = revisitgeometry(sc, lc)
     logging.info("My result :{}".format(result))
-    return jsonify(result=result)
+    return jsonify(result)
 
 
 @app.route('/inventory-management', methods=['POST'])
