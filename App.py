@@ -8,6 +8,7 @@ from codeitsuisse.routes.cluster import cluster
 from codeitsuisse.routes.inventory_management import inventory_management
 from codeitsuisse.routes.revisitgeometry import revisitgeometry
 from codeitsuisse.routes.salad_spree import salad_spree
+from codeitsuisse.routes.social_distancing import social_distancing
 
 app = Flask(__name__)
 logger = logging.getLogger(__name__)
@@ -28,6 +29,16 @@ def evaluate_salad_spree():
     return jsonify(result=result)
 
 
+@app.route('/inventory-management', methods=['POST'])
+def evaluate_inventory_management():
+    data = request.get_json()
+    logging.info("data sent for evaluation {}".format(data))
+    name, items = data[0].get("searchItemName"), data[0].get("items")
+    result = inventory_management(name, items)
+    logging.info("My result :{}".format(result))
+    return jsonify(result)
+
+
 @app.route('/revisitgeometry', methods=['POST'])
 def evaluate_revisitgeometry():
     data = request.get_json()
@@ -38,14 +49,13 @@ def evaluate_revisitgeometry():
     return jsonify(result)
 
 
-@app.route('/inventory-management', methods=['POST'])
-def evaluate_inventory_management():
+@app.route('/social_distancing', methods=['POST'])
+def evaluate_social_distancing():
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
-    name, items = data[0].get("searchItemName"), data[0].get("items")
-    result = inventory_management(name, items)
+    result = social_distancing(data.get("tests"))
     logging.info("My result :{}".format(result))
-    return jsonify(result)
+    return jsonify(answers=result)
 
 
 @app.route('/cluster', methods=['POST'])
