@@ -76,6 +76,16 @@ def evaluate_clean_floor():
     return jsonify(answers=result)
 
 
+@app.route('/contact_trace', methods=['POST'])
+def evaluate_contact_trace():
+    data = request.get_json()
+    logging.info("data sent for evaluation {}".format(data))
+    infected, origin, cluster = data.get("infected"), data.get("origin"), data.get("cluster")
+    result = contact_trace(infected, origin, cluster)
+    logging.info("My result :{}".format(result))
+    return jsonify(result)
+
+
 logger = logging.getLogger()
 handler = logging.StreamHandler()
 formatter = logging.Formatter(
