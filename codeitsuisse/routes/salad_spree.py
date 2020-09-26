@@ -1,22 +1,5 @@
-import logging
 import unittest
 from collections import deque
-
-from flask import request, jsonify
-
-# from codeitsuisse import app
-
-logger = logging.getLogger(__name__)
-
-
-# @app.route('/salad-spree', methods=['POST'])
-# def evaluate_salad_spree():
-#     data = request.get_json()
-#     logging.info("data sent for evaluation {}".format(data))
-#     n, arrs = data.get("number_of_salads"), data.get("salad_prices_street_map")
-#     result = True or salad_spree(n, arrs)
-#     logging.info("My result :{}".format(result))
-#     return jsonify(result)
 
 
 def salad_spree(n, arrs):
