@@ -5,6 +5,7 @@ from flask import request, jsonify, Flask
 
 from codeitsuisse.routes.clean_floor import clean_floor
 from codeitsuisse.routes.cluster import cluster
+from codeitsuisse.routes.contact_trace import contact_trace
 from codeitsuisse.routes.inventory_management import inventory_management
 from codeitsuisse.routes.revisitgeometry import revisitgeometry
 from codeitsuisse.routes.salad_spree import salad_spree
