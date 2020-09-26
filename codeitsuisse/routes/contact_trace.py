@@ -3,18 +3,30 @@ import unittest
 
 def contact_trace(infected, origin, cluster):
     traces = []
+    if not cluster:
+        s1, s2 = infected["genome"], origin["genome"]
+        if related(s1, s2):
+            traces.append(f"{infected['name']}{'*' if is_non_silent(s1, s2) else ''} -> {origin['name']}")
+
     for c in cluster:
         s1, s2, s3 = infected["genome"], c["genome"], origin["genome"]
         if related(s1, s2) and related(s1, s3):
-            traces.append(f"{infected['name']} -> {c['name']}")
-            traces.append(f"{infected['name']} -> {origin['name']}")
+            traces.append(f"{infected['name']}{'*' if is_non_silent(s1, s2) else ''} -> {c['name']}")
+            traces.append(f"{infected['name']}{'*' if is_non_silent(s1, s3) else ''} -> {origin['name']}")
         elif related(s1, s2) and related(s2, s3):
-            traces.append(f"{infected['name']}* -> {c['name']} -> {origin['name']}")
+            traces.append(
+                f"{infected['name']}{'*' if is_non_silent(s1, s2) else ''} -> {c['name']} -> {origin['name']}{'*' if is_non_silent(s2, s3) else ''}")
     return traces
 
 
 def related(s1, s2):
     return sum([int(c1 != c2) for c1, c2 in zip(s1, s2)]) <= 2
+
+
+def is_non_silent(s1, s2):
+    s1 = s1.split('-')
+    s2 = s2.split('-')
+    return sum([int(c1[0] != c2[0]) for c1, c2 in zip(s1, s2)]) >= 2
 
 
 class Test(unittest.TestCase):
