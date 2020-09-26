@@ -3,11 +3,14 @@ from collections import deque
 
 
 def inventory_mgmt(name, items):
-    finals = []
-    for item in items:
-        ops, final = convert(name, item)
-        finals.append([ops, final])
-    return [final[-1] for final in sorted(finals)]
+    try:
+        finals = []
+        for item in items:
+            ops, final = convert(name, item)
+            finals.append([ops, final])
+        return [final[-1] for final in sorted(finals)]
+    except:
+        return []
 
 
 def convert(src, dst):
