@@ -3,6 +3,7 @@ import socket
 
 from flask import request, jsonify, Flask
 
+from codeitsuisse.routes.clean_floor import clean_floor
 from codeitsuisse.routes.cluster import cluster
 from codeitsuisse.routes.contact_trace import contact_trace
 from codeitsuisse.routes.inventory_management import inventory_management
@@ -54,6 +55,15 @@ def evaluate_cluster():
     result = cluster(data)
     logging.info("My result :{}".format(result))
     return jsonify(answer=result)
+
+
+@app.route('/clean_floor', methods=['POST'])
+def evaluate_clean_floor():
+    data = request.get_json()
+    logging.info("data sent for evaluation {}".format(data))
+    result = clean_floor(data.get("tests"))
+    logging.info("My result :{}".format(result))
+    return jsonify(answers=result)
 
 
 logger = logging.getLogger()
