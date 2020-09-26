@@ -2,7 +2,6 @@ import unittest
 
 
 def clean_floor(tests):
-    print(tests.items())
     return {k: clean(v["floor"]) for k, v in tests.items()}
 
 
