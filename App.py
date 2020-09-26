@@ -1,14 +1,28 @@
 import logging
 import socket
 
-from codeitsuisse import app
+from flask import request, jsonify, Flask
 
+# from codeitsuisse import app
+from codeitsuisse.routes.salad_spree import salad_spree
+
+app = Flask(__name__)
 logger = logging.getLogger(__name__)
 
 
 @app.route('/', methods=['GET'])
 def default_route():
     return "Python Template"
+
+
+@app.route('/salad-spree', methods=['POST'])
+def evaluate_salad_spree():
+    data = request.get_json()
+    logging.info("data sent for evaluation {}".format(data))
+    n, arrs = data.get("number_of_salads"), data.get("salad_prices_street_map")
+    result = salad_spree(n, arrs)
+    logging.info("My result :{}".format(result))
+    return jsonify(result)
 
 
 logger = logging.getLogger()
