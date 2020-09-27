@@ -10,6 +10,7 @@ from codeitsuisse.routes.inventory_management import inventory_management
 from codeitsuisse.routes.revisitgeometry import revisitgeometry
 from codeitsuisse.routes.salad_spree import salad_spree
 from codeitsuisse.routes.social_distancing import social_distancing
+from codeitsuisse.routes.supermarket import supermarket
 
 app = Flask(__name__)
 logger = logging.getLogger(__name__)
@@ -85,6 +86,16 @@ def evaluate_contact_trace():
     result = contact_trace(infected, origin, cluster)
     logging.info("My result :{}".format(result))
     return jsonify(result)
+
+
+@app.route('/supermarket', methods=['POST'])
+def evaluate_supermarket():
+    data = request.get_json()
+    logging.info("data sent for evaluation {}".format(data))
+    tests = data.get("tests")
+    result = supermarket(tests)
+    logging.info("My result :{}".format(result))
+    return jsonify(answers=result)
 
 
 logger = logging.getLogger()
