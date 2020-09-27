@@ -63,5 +63,16 @@ class Test(unittest.TestCase):
                 }
             ]))
 
+        self.assertEqual(["v98 -> a21"], contact_trace(
+            {
+                'name': 'v98',
+                'genome': 'acg-gcu-uca-gca-acu-ccc-gua-acg-gcu-uca-gca-acu-cac-gaa'
+            },
+            {
+                'name': 'a21',
+                'genome': 'acg-gcc-uca-gca-acu-ccc-gua-acg-gcu-uca-gca-acu-cac-gac'
+            },
+            []))
+
         if __name__ == "__main__":
             unittest.main()

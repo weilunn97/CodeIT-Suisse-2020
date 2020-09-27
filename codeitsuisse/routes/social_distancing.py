@@ -8,14 +8,15 @@ def social_distancing(tests):
 def solve(seats, people, spaces, memo=dict()):
     c = (seats, people)
 
-    # if memo.get(c) is not None:
-    #     return memo[c]
-
     if seats <= 0:
-        return 0
+        return 0 if people > 0 else 1
 
-    if people <= 1:
+    if people == 1:
         return seats
+
+    if memo.get(c) is not None:
+        print(f"FETCHING MEMO({c})")
+        return memo[c]
 
     # CHOOSE TO SEAT A PERSON HERE, OR NOT
     memo[c] = solve(seats - 1 - spaces, people - 1, spaces, memo) + \
